@@ -54,51 +54,28 @@
                 <div class="card">
                     <div class="card-content center">
                         <div class="row">
-                            <a class="waves-effect waves-light btn" onclick="calculator.addition(calculator.img_one, calculator.img_two);">
-                                <i class="material-icons ">add</i>
+                            <a class="waves-effect waves-light btn"
+                                onclick="calculator.not(calculator.img_one, calculator.img_two);">
+                                Not
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
-                                onclick="calculator.subtraction(calculator.img_one, calculator.img_two);">
-                                <i class="material-icons">remove</i>
+                                onclick="calculator.or(calculator.img_one, calculator.img_two);">
+                                Or
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
-                                onclick="calculator.multiplication(calculator.img_one, calculator.img_two);">
-                                <i class="material-icons">close</i>
+                                onclick="calculator.and(calculator.img_one, calculator.img_two);">
+                                And
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
-                                onclick="calculator.division(calculator.img_one, calculator.img_two);">
-                                <i class="material-icons">/</i>
+                                onclick="calculator.xor(calculator.img_one, calculator.img_two);">
+                                Xor
                             </a>
-                        </div>
-                        <div class="row">
-                            <a class="waves-effect waves-light btn"
-                                onclick="calculator.blending(calculator.img_one, calculator.img_two);">
-                                blending
-                            </a>
-                        </div>
-                        <div class="row">
-                            <a class="waves-effect waves-light btn"
-                                onclick="calculator.concatenar(calculator.img_one, calculator.img_two);">
-                                Concatenar
-                            </a>
-                        </div>
-                        <div class="row">
-                            <label for="constant-input">Constante</label>
-                            <input id="constant-input" type="number"/>
-                        </div>
-                        <div class="row">
-                            <input type="checkbox" id="constant-checkbox" name="checkbox-constant-op"/>
-                            <label for="constant-checkbox">Operação por Valor Constante</label>
-                        </div>
-                        <div class="row">
-                            <label for="blending-ratio-inpt">Blending Ratio (Defalut 80%)</label>
-                            <input type="number" id="blending-ratio-inpt"/>
                         </div>
                     </div>
                 </div>
@@ -144,8 +121,6 @@
 <script>
     let image_one_input = document.getElementById("image-one");
     let image_two_input = document.getElementById("image-two");
-    let opByConstantValueCheck = document.getElementById('constant-checkbox').checked;
-    let constantValue = document.getElementById('constant-input');
 
     image_one_input.onchange = event => {
         const output_img = document.getElementById("display-image-one");

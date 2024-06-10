@@ -1,0 +1,31 @@
+1 - Carregar uma imagem em escala de cinza ou RGB (independente do formato BMP, JPG, PNG, GIF...) e salvar seu conteúdo em uma estrutura de dados do tipo matriz. - OK
+2.1 - Soma e Subtração de duas imagens e por um valor constante - OK
+2.2 - Multiplicação e Divisão de uma imagem por um valor constante - OK
+3 - Implementar FlipLR e FlipUD - OK
+4 - Implementar recorte de regiões da imagem e salvar em uma nova imagem.
+5 - Concatenar duas imagens com a mesma dimensão (Linhas x Colunas) - OK
+6 - Carregar uma imagem e converter para o Negativo - OK
+7 - Implementar a técnica de Limiarização (criar uma imagem binária a partir de uma imagem RGB ou escala de cinza)
+8 - Implementar Equalização de Histograma - OK
+9 - Operações Lógicas em imagens binárias: AND, OR, NOT e XOR - OK
+10 - Implementar Combinação Linear (Blending) em duas imagens - OK
+
+11 - Implementar ténicas de Realce de Imagens, usando CONVOLUÇÂO no Domínio Espacial:
+	- Filtragem por MINIMO - OK
+	- Filtragem por MAXIMO - OK
+	- Filtragem por MEDIA  - OK
+	- Filtragem por MEDIANA - OK
+	- Filtragem por ORDEM - OK
+	- Suavização Conservativa - OK
+	- Filtro Gaussiano
+
+12 - Técnicas de Detecção de Bordas
+	- Filtro Prewitt
+	- Filtro Sobel
+	- Filtro Laplaciano
+13 - Operações Morfológicas
+	- Dilatação
+	- Erosão
+	- Abertura
+	- Fechamento
+	- Contorno

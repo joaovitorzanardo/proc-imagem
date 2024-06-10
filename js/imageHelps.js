@@ -25,6 +25,15 @@ function imageDataToImage(imagedata) {
     return image;
 }
 
+function normalizeValues(subtArray, imageData, maxValue, minValue) {
+    for (let i = 0; i < subtArray.length; i++) {
+        g = Math.round((255 / (maxValue - minValue)) * (subtArray[i] - minValue));
+        imageData.data[i] = g;
+    }
+
+    return imageData;
+}
+
 function matrixToImageData(matrix, width, height) {
     const typedArray = new Uint8ClampedArray(matrix.length);
     for (let i = 0; i < matrix.length - 4; i += 4) {
@@ -32,6 +41,21 @@ function matrixToImageData(matrix, width, height) {
       typedArray[i+ 1] = matrix[i + 1];
       typedArray[i + 2] = matrix[i + 2];
       typedArray[i + 3] = 255;
+    }
+
+    const imgData = new ImageData(typedArray, width, height);
+
+    return imgData;
+}
+
+function matrixToImageDataV2(matrix, width, height, arrayLength) {
+    const typedArray = new Uint8ClampedArray(arrayLength);
+    let pos = 0;
+    for (let i = 0; i < matrix.length; i++) {
+      for (let j = 0; j < matrix[i].length; j++) {
+        typedArray[pos] = matrix[i][j];
+        pos++;  
+      }  
     }
 
     const imgData = new ImageData(typedArray, width, height);
@@ -102,6 +126,10 @@ function separateChunkIntoPixels(matrix) {
 
         return newLine;
     });
+}
+
+function temAsMesmasDimensoes(img_one, img_two) {
+    return img_one.width === img_two.width && img_one.height === img_two.height;  
 }
 
 const transformToDrawChart = (arr) => arr.map((item, idx) => [idx, item]);
