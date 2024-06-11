@@ -12,5 +12,5 @@ app.get("/", function (req, res) {
   res.sendFile(indexHtml)
 })
 
-app.listen(process.env.PORT || 3000, 
+app.listen(process.env.PORT || 443, 
 	() => console.log("Server is running..."));
