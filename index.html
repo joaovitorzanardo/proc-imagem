@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>Processamento de Imagem</title>
@@ -54,26 +53,30 @@
                 <div class="card">
                     <div class="card-content center">
                         <div class="row">
-                            <a class="waves-effect waves-light btn" onclick="calculator.addition(calculator.img_one, calculator.img_two);">
-                                <i class="material-icons ">add</i>
+                            <a class="btn" onclick="calculator.addition(calculator.img_one, calculator.img_two);">
+                                <i class="material-icons">add</i>
+                                <input id="constant-input-add" type="number"/>
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
                                 onclick="calculator.subtraction(calculator.img_one, calculator.img_two);">
                                 <i class="material-icons">remove</i>
+                                <input id="constant-input-subt" type="number"/>                            
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
                                 onclick="calculator.multiplication(calculator.img_one, calculator.img_two);">
                                 <i class="material-icons">close</i>
+                                <input id="constant-input-mult" type="number"/>
                             </a>
                         </div>
                         <div class="row">
                             <a class="waves-effect waves-light btn"
                                 onclick="calculator.division(calculator.img_one, calculator.img_two);">
                                 <i class="material-icons">/</i>
+                                <input id="constant-input-div" type="number"/>
                             </a>
                         </div>
                         <div class="row">
@@ -87,14 +90,6 @@
                                 onclick="calculator.concatenar(calculator.img_one, calculator.img_two);">
                                 Concatenar
                             </a>
-                        </div>
-                        <div class="row">
-                            <label for="constant-input">Constante</label>
-                            <input id="constant-input" type="number"/>
-                        </div>
-                        <div class="row">
-                            <input type="checkbox" id="constant-checkbox" name="checkbox-constant-op"/>
-                            <label for="constant-checkbox">Operação por Valor Constante</label>
                         </div>
                         <div class="row">
                             <label for="blending-ratio-inpt">Blending Ratio (Defalut 80%)</label>
@@ -144,8 +139,6 @@
 <script>
     let image_one_input = document.getElementById("image-one");
     let image_two_input = document.getElementById("image-two");
-    let opByConstantValueCheck = document.getElementById('constant-checkbox').checked;
-    let constantValue = document.getElementById('constant-input');
 
     image_one_input.onchange = event => {
         const output_img = document.getElementById("display-image-one");
@@ -169,16 +162,13 @@
         img_one: document.getElementById('display-image-one'),
         img_two: document.getElementById('display-image-two'),
         addition: (img_one, img_two) => {
+            let constantAddValue = document.getElementById('constant-input-add').value;
             let image = null;
-            if (opByConstantValueCheck == true) {
-                if (constantValue.value.trim == '') {
-                    alert("Digite um valor constante!")
-                    return
-                }
-                image = ImageCalculator.additionByConstantValue(img_one, parseInt(constantValue.value));
-            } else {
+            if (constantAddValue.trim() === '') {
                 image = ImageCalculator.addition(img_one, img_two);
-            }
+            } else {
+                image = ImageCalculator.additionByConstantValue(img_one, parseInt(constantAddValue.trim()));
+            } 
 
             pageController.openResultModal(image.src);
         },
@@ -193,37 +183,37 @@
             pageController.openResultModal(image.src);
         },
         subtraction: (img_one, img_two) => {
+            let constantAddValue = document.getElementById('constant-input-subt').value;
             let image = null;
-            if (opByConstantValueCheck == true) {
-                if (constantValue.value.trim == '') {
-                    alert("Digite um valor constante!")
-                    return
-                }
-                image = ImageCalculator.subtractionByConstantValue(img_one, parseInt(constantValue.value));
-            } else {
+            if (constantAddValue.trim() === '') {
                 image = ImageCalculator.subtraction(img_one, img_two);
-            }
+            } else {
+                image = ImageCalculator.subtractionByConstantValue(img_one, parseInt(constantAddValue.trim()));
+            } 
 
             pageController.openResultModal(image.src);
         },
 
         multiplication: (img_one, img_two) => {
+            let constantAddValue = document.getElementById('constant-input-mult').value;
             let image = null;
-            if (opByConstantValueCheck == true) {
-                if (constantValue.value.trim == '') {
-                    alert("Digite um valor constante!")
-                    return
-                }
-                image = ImageCalculator.multiplicationByConstantValue(img_one, parseInt(constantValue.value));
-            } else {
+            if (constantAddValue.trim() === '') {
                 image = ImageCalculator.multiplication(img_one, img_two);
-            }
+            } else {
+                image = ImageCalculator.multiplicationByConstantValue(img_one, parseInt(constantAddValue.trim()));
+            } 
 
             pageController.openResultModal(image.src);
         },
         
         division: (img_one, img_two) => {
-            let image = ImageCalculator.division(img_one, img_two);
+            let constantAddValue = document.getElementById('constant-input-div').value;
+            let image = null;
+            if (constantAddValue.trim() === '') {
+                image = ImageCalculator.division(img_one, img_two);
+            } else {
+                image = ImageCalculator.divisionByConstantValue(img_one, parseInt(constantAddValue.trim()));
+            } 
 
             pageController.openResultModal(image.src);
         },
@@ -290,7 +280,6 @@
             let outputResult = document.getElementById("display-image-result");
             outputResult.src = src;
 
-            pageController.getModalInstance().open();
         },
         closeResultModal: () => {
             pageController.getModalInstance().close();
