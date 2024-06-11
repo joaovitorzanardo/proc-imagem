@@ -124,25 +124,12 @@ class ImageCalculator {
         let image_one = getImageData(img_one);
 
         let finalImageData = ImageCalculator.createImage(img_one.width, img_one.height);
-        let multArray = [];
+        let increaseBy = parseFloat((constantValue / 100).toFixed(2))
 
-        let maxValue = image_one.data[0] * constantValue;
-        let minValue = maxValue;
-
-        for (let i = 0; i < image_one.data.length;i++) {
-            multArray[i] = image_one.data[i] * constantValue;
-            
-            if (multArray[i] > maxValue) {
-                maxValue = multArray[i];
-            }
-
-            if (multArray[i] < minValue) {
-                minValue = multArray[i];
-            }
-
+        for (let i = 0; i < image_one.data.length; i++) {
+            let multPixel = Math.round(image_one.data[i] + Math.round(image_one.data[i] * increaseBy));
+            finalImageData.data[i] = truncateValues(multPixel);
         }
-
-        finalImageData = normalizeValues(multArray, finalImageData, maxValue, minValue);
         
         let finalImage = imageDataToImage(finalImageData);
 
@@ -163,6 +150,20 @@ class ImageCalculator {
                 divededValue = image_one.data[i];
             }
             finalImageData[i] = divededValue;
+        }
+        
+        let finalImage = imageDataToImage(finalImageData);
+
+        return finalImage;
+    }
+
+    static divisionByConstantValue(img_one, constantValue) {
+        let image_one = getImageData(img_one);
+
+        let finalImageData = ImageCalculator.createImage(img_one.width, img_one.height);
+
+        for (let i = 0; i < image_one.data.length; i++) {
+            finalImageData.data[i] = Math.round(image_one.data[i] / constantValue);
         }
         
         let finalImage = imageDataToImage(finalImageData);
@@ -281,4 +282,3 @@ class ImageCalculator {
         return getImageData(image_temp);
     }
 }
-
